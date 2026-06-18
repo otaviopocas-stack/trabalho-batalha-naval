@@ -1,8 +1,12 @@
-public class batalhaNaval{
-    public static void main(String[] args){
-        MetodosBatalha.inicializarTabuleiro(tabuleiroInicial);
+public class batalhaNaval {
+
+    public static void main(String[] args) {
+
+        char[][] tabuleiroInicial = MetodosBatalha.inicializarTabuleiro();
+        String titulo = "Tabuleiro Inicial";
+
         MetodosBatalha.exibirInstrucoesDefensor();
-        MetodosBatalha.exibirTabuleiro(tabuleiro, titulo);
+        MetodosBatalha.exibirTabuleiro(tabuleiroInicial, titulo);
 
     }
 }
