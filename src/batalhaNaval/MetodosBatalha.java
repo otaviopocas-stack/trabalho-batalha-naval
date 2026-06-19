@@ -48,4 +48,28 @@ public class MetodosBatalha {
             System.out.println();
         }
     }
+
+    public static boolean posicionarNavio(char[][] tabuleiro, int linha, int coluna, int tamanhoNavio) {
+        // Verifica se o navio cabe na horizontal a partir da posição fornecida
+        if (coluna + tamanhoNavio > tamanho) {
+            System.out.println("Posição inválida! O navio não cabe na horizontal.");
+            return false;
+        }
+
+        // Verifica se a posição está livre para o navio
+        for (int i = 0; i < tamanhoNavio; i++) {
+            if (tabuleiro[linha][coluna + i] != agua) {
+                System.out.println("Posição inválida! Já existe um navio aqui.");
+                return false;
+            }
+        }
+
+        // Aprovado, posiciona o navio no tabuleiro
+        for (int i = 0; i < tamanhoNavio; i++) {
+            tabuleiro[linha][coluna + i] = navio; 
+        }
+
+        System.out.println("Navio posicionado com sucesso!");
+        return true;
+    }
 }
