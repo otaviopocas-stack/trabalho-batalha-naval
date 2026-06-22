@@ -1,5 +1,5 @@
 Trabalho de simulação do jogo de Batalha Naval:
-### Grupo: Pedro S. Ruffo, Gustavo machado e Otavio Poças.
+### Grupo: Pedro S. Ruffo, Gustavo Correia Machado e Otavio Poças.
 
 
 O objeto do trabalho era montar um jogo de batalha naval funcional, utilizando a liguagem de programação
