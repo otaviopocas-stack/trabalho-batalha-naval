@@ -8,7 +8,8 @@ public class MetodosBatalha {
     public static char acerto = 'X';
     public static char erro = 'O';
     public static Scanner leitura = new Scanner(System.in);
-
+    public static int totalCasasNavio = 16;
+    public static int limiteTentativas = 30;
     public static char[][] inicializarTabuleiro() {
         char[][] tabuleiroInicial = new char[tamanho][tamanho];
 
@@ -215,6 +216,67 @@ public class MetodosBatalha {
             exibirTabuleiro(tabuleiro, "Tabuleiro do Defensor");
         }
     }  
+    public static boolean realizarAtaque(char[][] tabuleiroDefensor, char[][] tabuleiroAtaque, int linha, int coluna) {
 
+         if (linha < 0 || linha >= tamanho || coluna < 0 || coluna >= tamanho) {
+        System.out.println("Coordenada fora do tabuleiro! Tente Novamente.");
+        return false;
+    }
+
+         if (tabuleiroAtaque[linha][coluna] == acerto || tabuleiroAtaque[linha][coluna] == erro) {
+        System.out.println("Você já atacou essa posição! Escolha outra.");
+        return false;
+    }
+
+    if (tabuleiroDefensor[linha][coluna] == navio) {
+        tabuleiroAtaque[linha][coluna] = acerto;
+        tabuleiroDefensor[linha][coluna] = acerto;
+        System.out.println("ACERTOU!");
+        return true;
+    } else {
+        tabuleiroAtaque[linha][coluna] = erro;
+        System.out.println("ERROU!");
+        return false;
+    }
 }
+    public static int contarAcertos(char[][] tabuleiroAtaque) {
+    int acertos = 0;
+    for (int i = 0; i < tamanho; i++) {
+        for (int j = 0; j < tamanho; j++) {
+            if (tabuleiroAtaque[i][j] == acerto) {
+                acertos++;
+            }
+        }
+    }
+    return acertos;
+      }
+      public static boolean verificarFimDeJogo(char[][] tabuleiroAtaque, int tentativasUsadas) {
+    int acertos = contarAcertos(tabuleiroAtaque);
+
+    if (acertos >= totalCasasNavio) {
+        System.out.println("\n=== FIM DE JOGO ===");
+        System.out.println("O Atacante venceu! Todos os navios foram destruídos em " + tentativasUsadas + " tentativas.");
+        return true;
+    }
+
+    if (tentativasUsadas >= limiteTentativas) {
+        System.out.println("\n=== FIM DE JOGO ===");
+        System.out.println("O Criador venceu! O Atacante atingiu o limite de " + limiteTentativas + " tentativas.");
+        System.out.println("Navios restantes: " + (totalCasasNavio - acertos) + " casas.");
+        return true;
+    }
+
+    return false;
+    }
+    public static void exibirInstrucoesAtacante() {
+    System.out.println("\n-- Instruções do Atacante --");
+    System.out.println("- Informe a linha e a coluna que deseja atacar;");
+    System.out.println("- Coordenadas devem estar entre 0 e " + (tamanho - 1) + ";");
+    System.out.println("- Você tem no máximo " + limiteTentativas + " tentativas;");
+    System.out.println("- Destrua todos os navios do Criador para vencer!");
+  }
+  
+}
+
+
     
